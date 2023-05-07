@@ -20,26 +20,30 @@ while(True):
     else:
         message = json.loads(message)
 
-    isKeyDown = message['isKeyDown']
-    keyCode = message['keyCode']
-    # print('isKeyDown: ' + str(isKeyDown))
-    # print('keyCode: ' + keyCode)
-    
-    match keyCode:
-        case 'Rotate':
-            keyCode = 'i'
-        case 'Left':
-            keyCode = 'j'
-        case 'Right':
-            keyCode = 'l'
-        case 'SD':
-            keyCode = 'k'
-        case 'HD':
-            keyCode = ' '
-        case 'Hold':
-            keyCode = 'o'
+    # isKeyDown = message['isKeyDown']
+    # keyCode = message['keyCode']
+    # # print('isKeyDown: ' + str(isKeyDown))
+    # # print('keyCode: ' + keyCode)
 
-    if(isKeyDown):
-        pyautogui.keyDown(keyCode)
-    else:
-        pyautogui.keyUp(keyCode)
+    for keyCode in message.keys():
+        # keyCode = ''
+        isKeyDown = message[keyCode]
+        match keyCode:
+            case 'Rotate':
+                keyCode = 'i'
+            case 'Left':
+                keyCode = 'j'
+            case 'Right':
+                keyCode = 'l'
+            case 'SD':
+                keyCode = 'k'
+            case 'HD':
+                keyCode = ' '
+            case 'Hold':
+                keyCode = 'o'
+
+
+        if(isKeyDown):
+            pyautogui.keyDown(keyCode)
+        else:
+            pyautogui.keyUp(keyCode)
